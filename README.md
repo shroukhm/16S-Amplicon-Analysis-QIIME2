@@ -29,16 +29,43 @@ https://library.qiime2.org/quickstart/qiime2
 
 ## Pipeline Overview
 
-1. Summarize demultiplexed sequences
-2. Denoising → ASV table generation
-3. Feature filtering
-4. K-mer based diversity analysis
-5. Alpha rarefaction
-6. Taxonomic analysis
-7. Differential abundance testing (ANCOM-BC2 / da-barplot)
+- Sample metadata exploration
+- Demultiplexed sequence quality assessment
+- ASV generation
+- Feature-table exploration
+- K-mer-based diversity analysis
+- Alpha diversity
+- Beta diversity
+- Taxonomic classification
+- Taxonomic barplots
+- Differential abundance analysis using ANCOM-BC2
 
 ---
 
+## Dataset
+
+The tutorial uses 16S rRNA gene sequencing data from the Gut-to-Soil Axis study.
+
+The data represents different sample types related to human excrement composting and soil/compost environments.
+
+The dataset contains:
+
+- 104 forward samples
+- 104 reverse samples
+- 
+The analysis includes different sample types associated with human excrement, compost, soil, and related materials.
+
+---
+## Software
+
+- QIIME 2
+- Conda / Miniconda
+- Bash
+- macOS Apple Silicon
+- QIIME 2 `.qza` artifacts
+- QIIME 2 `.qzv` visualizations
+
+---
 ## Key Results Summary
 
 ### Demultiplexed sequences
@@ -57,14 +84,20 @@ https://library.qiime2.org/quickstart/qiime2
 - Number of unique features: **335**
 - Total observations: **29,978**
 
-### Notable biological findings
-- Human Excrement (HE) is clearly separated from all other sample types in PCoA
-- Human Excrement Compost (HEC) is more similar to Food Compost than to Human Excrement
-- SunMar Microbe Mix has the lowest richness (~500 observed features)
-- Taxonomic composition:
-  - Bulking Material → dominated by **Proteobacteria**
-  - Human Excrement → strongly dominated by **Firmicutes**
-  - Human Excrement Compost → mainly **Proteobacteria**
+### Taxonomic Analysis
+
+Different sample types showed different dominant bacterial groups.
+
+- Bulking Material was mainly dominated by Proteobacteria.
+- Food Compost showed a mixture of Proteobacteria, Actinobacteria, and Firmicutes.
+- Human Excrement was strongly dominated by Firmicutes.
+- Human Excrement Compost was predominantly Proteobacteria, with Bacteroidetes and Actinobacteria also present.
+
+### Differential Abundance
+
+ANCOM-BC2 was used to investigate differential abundance between sample groups.
+
+The analysis identified taxa including SMB53 and Epulopiscium as enriched in specific comparisons, while Pseudomonadaceae and Blautia were depleted in specific comparisons.
 
 ---
 
@@ -81,6 +114,8 @@ qiime composition ancombc2-visualizer \
 Because of a different QIIME 2 version, I used:
 
 ```bash
-qiime composition da-barplot ...
+qiime composition da-barplot \
+  --i-data ancombc2-results.qza \
+  --i-taxonomy taxonomy.qza \
+  --o-visualization ancombc2-barplot.qzv
 ```
-See details in 'notes/version-differences.md'
