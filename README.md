@@ -20,7 +20,7 @@ https://amplicon-docs.qiime2.org/en/stable/tutorials/gut-to-soil/
 ## Installation (macOS Apple Silicon)
 
 See detailed instructions in:  
-[`installation/mac-apple-silicon.md`](installation/mac-apple-silicon.md)
+`installation.md`
 
 Main reference used:  
 https://library.qiime2.org/quickstart/qiime2
